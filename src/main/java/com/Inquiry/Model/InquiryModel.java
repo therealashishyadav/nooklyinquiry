@@ -5,84 +5,95 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Version;
+import jakarta.persistence.*;
 
 @Entity
+@Table(name = "inquiry_model")
 public class InquiryModel {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "inquiry_id")
+    private Long inquiryId;
 
-	private long inquiryId;
-	private String fullName;
-	private String phone;
-	private String email;
-	private String message;
-	private String inquiryType;
-	private String location;
+    @Column(name = "full_name", nullable = false)
+    private String fullName;
 
-	public long getInquiryId() {
-		return inquiryId;
-	}
+    @Column(name = "phone", nullable = false)
+    private String phone;
 
-	public void setInquiryId(long inquiryId) {
-		this.inquiryId = inquiryId;
-	}
+    @Column(name = "email", nullable = false)
+    private String email;
 
-	public String getFullName() {
-		return fullName;
-	}
+    @Column(name = "message", columnDefinition = "TEXT")
+    private String message;
 
-	public void setFullName(String fullName) {
-		this.fullName = fullName;
-	}
+    @Column(name = "inquiry_type")
+    private String inquiryType;
 
-	public String getPhone() {
-		return phone;
-	}
+    @Column(name = "location")
+    private String location;
 
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
+    public InquiryModel() {
+    }
 
-	public String getEmail() {
-		return email;
-	}
+    public Long getInquiryId() {
+        return inquiryId;
+    }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    public void setInquiryId(Long inquiryId) {
+        this.inquiryId = inquiryId;
+    }
 
-	public String getMessage() {
-		return message;
-	}
+    public String getFullName() {
+        return fullName;
+    }
 
-	public void setMessage(String message) {
-		this.message = message;
-	}
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
 
-	public String getInquiryType() {
-		return inquiryType;
-	}
+    public String getPhone() {
+        return phone;
+    }
 
-	public void setInquiryType(String inquiryType) {
-		this.inquiryType = inquiryType;
-	}
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
 
-	public String getLocation() {
-		return location;
-	}
+    public String getEmail() {
+        return email;
+    }
 
-	public void setLocation(String location) {
-		this.location = location;
-	}
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-	@Override
-	public String toString() {
-		return "InquiryModel [inquiryId=" + inquiryId + ", fullName=" + fullName + ", phone=" + phone + ", email="
-				+ email + ", message=" + message + ", inquiryType=" + inquiryType + ", location=" + location + "]";
-	}
+    public String getMessage() {
+        return message;
+    }
 
-	public InquiryModel(long inquiryId, String fullName, String phone, String email, String message, String inquiryType,
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public String getInquiryType() {
+        return inquiryType;
+    }
+
+    public void setInquiryType(String inquiryType) {
+        this.inquiryType = inquiryType;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+	public InquiryModel(Long inquiryId, String fullName, String phone, String email, String message, String inquiryType,
 			String location) {
 		super();
 		this.inquiryId = inquiryId;
@@ -94,9 +105,11 @@ public class InquiryModel {
 		this.location = location;
 	}
 
-	public InquiryModel() {
-		super();
-		// TODO Auto-generated constructor stub
+	@Override
+	public String toString() {
+		return "InquiryModel [inquiryId=" + inquiryId + ", fullName=" + fullName + ", phone=" + phone + ", email="
+				+ email + ", message=" + message + ", inquiryType=" + inquiryType + ", location=" + location + "]";
 	}
-
+    
+    
 }
