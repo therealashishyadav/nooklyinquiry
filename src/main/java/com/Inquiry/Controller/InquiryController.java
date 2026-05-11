@@ -21,26 +21,44 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
 @RequestMapping("/inquiry")
-@CrossOrigin(origins = {
-        "http://localhost:4200",
-        "https://nookly-frontend-hslj.vercel.app"})
 public class InquiryController {
 
-	
-	
-	public InquiryController() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+    @Autowired
+    private InquiryService inquiryService;
+//
+//    @PostMapping("/sendMessage")
+//    public ResponseEntity<InquiryModel> sendInquiry(
+//            @RequestBody InquiryModel inquiryModel) {
+//
+//        InquiryModel saved =
+//                inquiryService.sendMessage(inquiryModel);
+//
+//        return new ResponseEntity<>(saved, HttpStatus.OK);
+//    }
+    
+    @PostMapping("/sendMessage")
+    public ResponseEntity<?> sendInquiry(
+            @RequestBody InquiryModel inquiryModel) {
 
-	@Autowired
-	private InquiryService inquiryService;
+        try {
 
-	@PostMapping("/sendMessage")
-	public ResponseEntity<InquiryModel> sendInquiry(@RequestBody InquiryModel inquiryModel) {
-		InquiryModel inquiryModel2 = this.inquiryService.sendMessage(inquiryModel);
-		return new ResponseEntity<>(inquiryModel2, HttpStatus.OK);
-	}
+            System.out.println("REQUEST = " + inquiryModel);
+
+            InquiryModel saved =
+                    inquiryService.sendMessage(inquiryModel);
+
+            System.out.println("SAVED = " + saved);
+
+            return ResponseEntity.ok(saved);
+
+        } catch (Exception e) {
+
+            e.printStackTrace();
+
+            return ResponseEntity.internalServerError()
+                    .body(e.getMessage());
+        }
+    }
 
 	@GetMapping("/get_all_message")
 	public List<InquiryModel> getAllInquiry() {
