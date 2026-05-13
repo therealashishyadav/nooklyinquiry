@@ -23,8 +23,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 @RequestMapping("/inquiry")
 public class InquiryController {
 
-    @Autowired
-    private InquiryService inquiryService;
+	@Autowired
+	private InquiryService inquiryService;
 //
 //    @PostMapping("/sendMessage")
 //    public ResponseEntity<InquiryModel> sendInquiry(
@@ -35,30 +35,27 @@ public class InquiryController {
 //
 //        return new ResponseEntity<>(saved, HttpStatus.OK);
 //    }
-    
-    @PostMapping("/sendMessage")
-    public ResponseEntity<?> sendInquiry(
-            @RequestBody InquiryModel inquiryModel) {
 
-        try {
+	@PostMapping("/sendMessage")
+	public ResponseEntity<?> sendInquiry(@RequestBody InquiryModel inquiryModel) {
 
-            System.out.println("REQUEST = " + inquiryModel);
+		try {
 
-            InquiryModel saved =
-                    inquiryService.sendMessage(inquiryModel);
+			System.out.println("REQUEST = " + inquiryModel);
 
-            System.out.println("SAVED = " + saved);
+			InquiryModel saved = inquiryService.sendMessage(inquiryModel);
 
-            return ResponseEntity.ok(saved);
+			System.out.println("SAVED = " + saved);
 
-        } catch (Exception e) {
+			return ResponseEntity.ok(saved);
 
-            e.printStackTrace();
+		} catch (Exception e) {
 
-            return ResponseEntity.internalServerError()
-                    .body(e.getMessage());
-        }
-    }
+			e.printStackTrace();
+
+			return ResponseEntity.internalServerError().body(e.getMessage());
+		}
+	}
 
 	@GetMapping("/get_all_message")
 	public List<InquiryModel> getAllInquiry() {
@@ -69,13 +66,10 @@ public class InquiryController {
 // Get all inquires by name, email, phone, location, inquirytype.
 
 	@GetMapping("/search")
-    public List<InquiryModel> searchInquiries(
-            @RequestParam(required = false) String fullName,
-            @RequestParam(required = false) String email,
-            @RequestParam(required = false) String phone,
-            @RequestParam(required = false) String location,
-            @RequestParam(required = false) String inquiryType) {
+	public List<InquiryModel> searchInquiries(@RequestParam(required = false) String fullName,
+			@RequestParam(required = false) String email, @RequestParam(required = false) String phone,
+			@RequestParam(required = false) String location, @RequestParam(required = false) String inquiryType) {
 
-        return inquiryService.searchInquiries(fullName, email, phone, location, inquiryType);
-    }
+		return inquiryService.searchInquiries(fullName, email, phone, location, inquiryType);
+	}
 }
